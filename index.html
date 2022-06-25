@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="types.css" media="screen"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+    <title>POKEDEX</title>
+</head>
+
+<body>
+    <main id="content">
+        <h1>POKEDEX</h1>
+        <!-- Filters -->
+        <section name="filters">
+
+            <!-- Filters - buttons-->
+            <div name="filter_button">
+                <button id="id" onclick="order_id()">ID</button>
+                <button id="az" onclick="order_az()">A-Z</button>
+                <button id="za" onclick="order_za()">Z-A</button>
+                <!-- Filters - select -->
+                <select name="pokes" id="poke_types" onchange="order_select()">
+                    <option value="null" selected hidden>Select a type</option>
+                </select>
+            </div>
+
+            <!-- Filters - name -->
+            <div id="text_input">
+                <div id="filter_name">
+                    <input type="text" id="pokemon_name_filter" onkeyup="filter()" placeholder="Enter a Pokémon name">
+                    <div class="search" onclick="setValue()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1002.67 1002.67"><path d="M718.08,636.59H675.3L660.14,622c127-147.91,110-370.74-37.9-497.71s-370.74-110-497.71,37.91-110,370.73,37.91,497.7c132.24,113.53,327.55,113.53,459.8,0L636.86,675v42.78L867,948a57.07,57.07,0,0,0,80.68-80.68Zm-324.9,0c-134.57,0-243.67-109.1-243.67-243.68s109.1-243.67,243.67-243.67S636.86,258.33,636.86,392.91c.18,134.4-108.63,243.5-243,243.68Z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Show Pokémon Details -->
+        <section>
+            <div></div>
+        </section>
+
+        <!-- Cards -->
+        <section id="cards"> 
+            <!-- Card example
+                <div name="card">
+                    <p name="pokemon_name">NAME</p>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
+                        alt="Pokémon name">
+                    <span class="normal">ELEMENT</span>
+                </div>
+            -->
+        </section>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a target="_blank" href="https://github.com/GARGA342">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+            <li><a target="_blank" href="https://www.linkedin.com/in/gabriel-da-costa342/">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </li>
+            <li><a href="mailto:gabriel.prates.costa@gmail.com">
+                    <i class="fa fa-envelope-o"></i>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <a class="signature">©Gabriel Costa - 2022</a>
+        </ul>
+    </footer>
+</body>
+
+</html>

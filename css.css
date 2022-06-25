@@ -1,0 +1,183 @@
+/*
+ *  colors: #c9351b  F5BB00  2F3061  D5F2E3  73BA9B
+ */
+*{
+    background-color: #fAfAfA;
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    margin: 15px;
+    min-height: 800px;
+}
+
+section[name="filters"]{
+    margin-top: 10px;
+}
+
+button{
+    background-color: #77cc55;
+    color: white;
+    border: solid 1px;
+    border-radius: 5px;
+    width: 80px;
+    height: 25px;
+    box-shadow: 2px 2px #2F3061;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #63aa47;
+}
+
+select{
+    background-color: #F5BB00;
+    color: black;
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: 2px 2px #2F3061;
+    cursor: pointer;
+}
+
+select:hover{
+    background-color: #ebb400;
+}
+
+div[id="filter_name"]{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid #2F3061;
+    border-radius: 5px;
+    height: 25px;
+    width: 445px;
+
+    box-shadow: 2px 2px #2F3061;
+    background-color: #fafafa;
+
+    margin-top: 10px;
+    padding-inline-end: 5px;
+    padding-inline-start: 1.5px;
+}
+
+input[type="text"]{
+    border: unset;
+    width: 90%;
+    height: 95%;
+    padding-inline: 10px;
+}
+
+input[type="text"]:focus{
+    border-radius: 5px;
+}
+
+#autocomplete{
+    position: absolute;
+    z-index: 1;
+    list-style: none;
+    width: 450px;
+    border-top: 1px solid #2F3061;
+    border-left: 1px solid #2F3061;
+    border-right: 1px solid #2F3061;
+}
+
+#autocomplete > li:hover{
+    background-color: #ebebeb;
+}
+
+#autocomplete > li{
+    border-bottom: 1px solid #2F3061;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.search{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+section[id="cards"]{
+    display: flex;
+    max-width: 1000px;
+    margin: 15px auto;
+    flex-wrap: wrap;
+}
+
+.no_pokemon{
+    background-color: #fafafa;
+    font-size: 20px;
+}
+
+section[id="cards"] > div{
+    flex: 0 1 200px;
+    margin: 10px;
+    padding: 10px;
+}
+
+div[name="card"]{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: .5px solid #2F3061;
+    box-shadow: 1px 1px #2F3061;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+div[name="card"]:hover{
+    transform: translate(-5px, -2px);
+    box-shadow: 5px 5px #2F3061;
+}
+
+img, p{
+    background-color: white;
+}
+
+footer{
+    padding: 15px;
+    background-color: #c9351b;
+    bottom: 0;
+}
+
+footer ul{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #c9351b;
+    list-style: none;
+}
+
+li a{
+    background-color: #c9351b;
+    color: white;
+    text-decoration: none;
+}
+
+a svg{
+    background-color: white;
+}
+
+a i{
+    background-color: #c9351b;
+}
+
+.fa-github, .fa-linkedin, .fa-envelope-o{
+    font-size:35px !important; 
+    color:#a5a5a5;
+} 
+
+.fa-github:hover,.fa-linkedin:hover,.fa-envelope-o:hover{
+    color:white;
+}
+
+.signature{
+    margin-top: 5px;
+    background-color: #c9351b;
+    color: white;
+}
