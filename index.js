@@ -60,7 +60,7 @@ function populateCard(data){
 
         let p = document.createElement('p') //p created
         p.setAttribute("name", "pokemon_name") //name attribute inserted in p
-        p.innerHTML = e.name //content inserted in p
+        p.innerHTML = capitalize(e.name) //content inserted in p
 
         div.appendChild(p) //append p in div
 
@@ -117,6 +117,10 @@ function populateCard(data){
         })
     })
 }
+
+function capitalize(word) {
+    return word[0].toUpperCase() + word.slice(1).toLowerCase();
+}  
 
 // Order functions
 function order_id(){
@@ -314,6 +318,10 @@ function checkClick(){
             document.getElementById("autocomplete").remove()
         }
     })
+}
+
+function showPoke(){
+    console.log(poke)
 }
 
 var write, read
