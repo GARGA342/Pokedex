@@ -1,5 +1,5 @@
 function getData(){
-    axios('https://pokeapi.co/api/v2/pokemon-form/?offset=0&limit=1154')
+    axios('https://pokeapi.co/api/v2/pokemon-form/?offset=0&limit=100')
     .then(response => {
         let data = Array()
         response.data.results.forEach(e => {
@@ -309,11 +309,11 @@ function unsetButton(btn){
 }
 
 function checkClick(){
-    document.addEventListener("click", function(event){
-        if(event.target.classList[0] != "pokemon_list"){
+    document.addEventListener("click", function(e){
+        if(document.getElementById("autocomplete")){
             document.getElementById("autocomplete").remove()
         }
-    });
+    })
 }
 
 var write, read
