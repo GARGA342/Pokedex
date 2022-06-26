@@ -185,7 +185,7 @@ function order_select(){
 
 function filter(){
     checkClick()
-    const search = document.getElementById("pokemon_name_filter").value
+    const search = document.getElementById("pokemon_name_filter").value.toLowerCase()
     if(document.getElementById("autocomplete")){
         document.getElementById("autocomplete").remove()
     }
@@ -230,7 +230,7 @@ function filter(){
 function setValue(event){
     let poke_name
     if(!event){
-        poke_name = document.getElementById("pokemon_name_filter").value
+        poke_name = document.getElementById("pokemon_name_filter").value.toLowerCase()
         getPokemon(poke_name)
     }else{
 
