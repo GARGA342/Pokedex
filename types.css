@@ -1,9 +1,10 @@
-span{
+.element{
     color: white;
     border-radius: 20px;
     padding: 8px;
     box-shadow: 2px 0 2px 0 black;
     margin: 2px;
+    text-align: center;
 }
 
 .normal{

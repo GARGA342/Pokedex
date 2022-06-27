@@ -8,9 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="types.css" media="screen"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="index.js"></script>
     <title>POKEDEX</title>
 </head>
 
@@ -42,14 +39,71 @@
             </div>
         </section>
 
-        <!-- Show Pokémon Details -->
-        <section>
-            <div></div>
-        </section>
+        <!-- Show Pokémon Details 
+        <section id="pokemonDetails">
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div id="dataModal">
+                        <p id="poke_name">POKÉMON NAME</p>
+                        <img id="img_modal" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif" width="90px" height="90px">
+                        <div id="pokeData">
+                            <div id="abilities" class="generalData">
+                                <p>Abilities:</p>
+                                <span>A</span>
+                                <span>B</span>
+                                <span>C</span>
+                            </div>
+
+                            <div id="types" class="generalData">
+                            </div>
+
+                            <div id="evolutioins" class="generalData">
+                                <p>Evolutions:</p>
+                                <span>Ivysaur</span>
+                                <span>Venusaur</span>
+                            </div>
+
+                            <div id="habitats" class="generalData">
+                                <p>Habitats:</p>
+                                <span>A</span>
+                                <span>B</span>
+                            </div>
+                        </div>
+                        <div id="combatData">
+                            <div>
+                                <span>HP</span>
+                                <div></div>
+                            </div>
+                            <div>
+                                <span>Attack</span>
+                                <div></div>
+                            </div>
+                            <div>
+                                <span>Defense</span>
+                                <div></div>
+                            </div>
+                            <div>
+                                <span>Sp.Attack</span>
+                                <div></div>
+                            </div>
+                            <div>
+                                <span>Sp.Defense</span>
+                                <div></div>
+                            </div>
+                            <div>
+                                <span>Speed</span>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </section>-->
 
         <!-- Cards -->
-        <section id="cards"> 
-            <!-- Card example
+        <section id="cards">
+            <!-- Card example 
                 <div name="card">
                     <p name="pokemon_name">NAME</p>
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
@@ -79,6 +133,10 @@
             <a class="signature">©Gabriel Costa - 2022</a>
         </ul>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
