@@ -4,11 +4,12 @@ function getData(){
     .then(response => {
         let data = Array()
         response.data.results.forEach(element => {
-            const obj = {id: "", name: element.name, url: element.url, img: "", gif: "", types: [], abilities: [], evolution: [], habitat: ""}
+            const obj = {id: "", name: element.name, url: element.url, img: "", gif: "", habitat: "", types: [], abilities: [], evolution: [], fields: []}
             data.push(obj)
         })
         localStorage.setItem('pokemon', JSON.stringify(data))
     })
+    getFields()
     getAttributes()
     getHabitat()
     getEvolution()
@@ -46,18 +47,37 @@ function getHabitat(){
     })
 }
 
+function getFields(){
+    const pokemon = JSON.parse(localStorage.getItem('pokemon'))
+    pokemon.forEach(e => {
+        let arr = Array()
+        axios("https://pokeapi.co/api/v2/pokemon/"+e.id).then(response => {
+            response.data.stats.forEach(el => {
+                const obj = {name: el.stat.name, value: el.base_stat}
+                arr.push(obj)
+            })
+            e.fields = arr
+        })
+    })
+    localStorage.setItem('pokemon', JSON.stringify(pokemon))
+}
+
 function getEvolution(){
     const pokemon = JSON.parse(localStorage.getItem('pokemon'))
     let i=0
     pokemon.forEach(e => {
-        axios("https://pokeapi.co/api/v2/evolution-chain/"+e.id).then(response => {
-            e.evolution = response.data.chain.evolves_to[0]
-            i++
-            if(pokemon.length == i){
-                localStorage.setItem('pokemon', JSON.stringify(pokemon))
-            }
+        axios("https://pokeapi.co/api/v2/pokemon-species/"+e.id).then(response => {
+            e.evolution = [response.data.evolution_chain.url]
+            axios(e.evolution[0]).then(response => {
+                e.evolution = response.data.chain
+                i++
+                if(pokemon.length == i){
+                    localStorage.setItem('pokemon', JSON.stringify(pokemon))
+                }
+            })
         })
     })
+
 }
 
 //functions to populate
@@ -171,7 +191,7 @@ function order_id(){
     arr.forEach(el => {
         data.forEach(e => {
             if(e.id == el){
-                let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat}
+                let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat, fields: e.fields}
                 pokes.push(obj)
             }
         })
@@ -193,7 +213,7 @@ function order_az(){
     arr.forEach(el => {
         data.forEach(e => {
             if(e.name == el){
-                let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat}
+                let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat, fields: e.fields}
                 pokes.push(obj)
             }
         })
@@ -216,7 +236,7 @@ function order_za(){
     arr.forEach(el => {
         data.forEach(e => {
             if(e.name == el){
-                let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat}
+                let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat, fields: e.fields}
                 pokes.push(obj)
             }
         })
@@ -233,7 +253,7 @@ function order_select(){
     let pokes = Array()
     data.forEach(e => {
         e.types.forEach(el => {
-            let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat}
+            let obj = {id: e.id, name: e.name, url: e.url, img: e.img, gif: e.gif, types: e.types, abilities: e.abilities, evolution: e.evolution, habitat: e.habitat, fields: e.fields}
             if(el.type.name == value){
                 pokes.push(obj)
             }
@@ -377,6 +397,144 @@ function getPokemon(name){
     }
 }
 
+function showModal(id){
+    let pokemon
+    JSON.parse(localStorage.getItem('pokemon')).forEach(e => {
+        if(e.id == id){
+            pokemon = e
+        }
+    })
+
+    let parent_tag = document.getElementById('content')
+    let child = document.createElement('div')
+    child.classList.add('modal')
+    child.setAttribute('id', 'modal')
+    parent_tag.appendChild(child)
+
+    parent_tag = child
+    child = document.createElement('div')
+    child.classList.add('modal-content')
+    parent_tag.appendChild(child)
+
+    parent_tag = child
+    child = document.createElement('span')
+    child.setAttribute('onclick', 'closeModal()')
+    child.classList.add('close')
+    child.innerHTML = '&times;'
+    parent_tag.appendChild(child)
+    
+    child = document.createElement('div')
+    child.setAttribute('id', 'dataModal')
+    parent_tag.appendChild(child)
+
+    //pokemon name
+    parent_tag = child
+    child = document.createElement('p')
+    child.setAttribute('id', 'poke_name')
+    child.innerHTML = capitalize(pokemon.name)
+    parent_tag.appendChild(child)
+
+    //img
+    child = document.createElement('img')
+    child.setAttribute('id', 'img_modal')
+    child.setAttribute('src', pokemon.gif)
+    child.setAttribute('width', '90px')
+    child.setAttribute('height', '90px')
+    parent_tag.appendChild(child)
+
+    child = document.createElement('div')
+    child.setAttribute('id', 'pokeData')
+    parent_tag.appendChild(child)
+
+    //abilities
+    parent_tag = child
+    child = document.createElement('div')
+    child.setAttribute('id', 'abilities')
+    child.classList.add('generalData')
+    parent_tag.appendChild(child)
+
+    parent_tag = child
+    child = document.createElement('p')
+    child.innerHTML = "Abilities:"
+    parent_tag.appendChild(child)
+
+    pokemon.abilities.forEach(e => {
+        const span = document.createElement('span')
+        span.innerHTML = capitalize(e.ability.name)
+        console.log(e)
+        parent_tag.appendChild(span)
+    })
+
+    //types
+    parent_tag = document.getElementById('pokeData')
+    child = document.createElement('div')
+    child.setAttribute('id', 'types')
+    child.classList.add('generalData')
+    parent_tag.appendChild(child)
+    parent_tag = child
+    
+    child = document.createElement('p')
+    child.innerHTML = "Types:"
+    parent_tag.appendChild(child)
+
+    pokemon.types.forEach(e => {
+        const span = document.createElement('span')
+        span.classList.add(e.type.name)
+        span.classList.add('element')
+        span.innerHTML = e.type.name
+        parent_tag.appendChild(span)
+    })
+
+    //evolutions
+    parent_tag = document.getElementById('pokeData')
+    child = document.createElement('div')
+    child.setAttribute('id', 'evolutions')
+    child.classList.add('generalData')
+    parent_tag.appendChild(child)
+
+    parent_tag = child
+    child = document.createElement('p')
+    child.innerHTML = "Evolutions:"
+    parent_tag.appendChild(child)
+
+    pokemon.evolution.evolves_to.forEach(e => {
+        e.evolves_to.forEach(e => {
+            const span = document.createElement('span')
+            span.innerHTML = capitalize(e.species.name)
+            parent_tag.appendChild(span)
+        })
+        const span = document.createElement('span')
+        span.innerHTML = capitalize(e.species.name)
+        parent_tag.appendChild(span)
+    })
+    const span = document.createElement('span')
+    span.innerHTML = capitalize(pokemon.evolution.species.name)
+    parent_tag.appendChild(span)
+
+    //habitat
+    parent_tag = document.getElementById('pokeData')
+    child = document.createElement('div')
+    child.setAttribute('id', 'habitat')
+    child.classList.add('generalData')
+    parent_tag.appendChild(child)
+    
+    parent_tag = child
+    child = document.createElement('p')
+    child.innerHTML = "Habitat:"
+    parent_tag.appendChild(child)
+    
+    child = document.createElement('span')
+    child.classList.add('habitat')
+    child.innerHTML = capitalize(pokemon.habitat)
+
+    parent_tag.appendChild(child)
+
+    //console.log(pokemon.name)
+    //console.log(pokemon.fields)
+
+    //open modal
+    document.getElementById('modal').style.display = 'block'
+}
 getData()
 populateCard(JSON.parse(localStorage.getItem('pokemon')))
 populateSelect()
